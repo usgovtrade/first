@@ -1,15 +1,265 @@
 <html>
-
 <head>
-<title> usgov main </title>
+<style>
+
+    #the-canvas {
+    border: 1px none black;
+    direction: ltr
+    ;
+  }
+
+</style>
+       <style> 
+            body { 
+                text-align:center; 
+            } 
+            h1 { 
+                color:black; 
+            } 
+        </style> 
+
+<script src="pdf.js"></script>
+
+
 </head>
+<body>
 
-<body bgcolor="white" text="blue">
+<align = "center">
 
-<h1> welcome usgov now</h1>
+<h1>Patent HOT or NOT</h1>
 
-usgov online
+<div>
+  <button id="hot" onclick="buttonhot()" style="background-color:lightblue">[HOT]</button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button id="not" onclick="buttonnot()" style="background-color:red">[NOT]</button><br>
+
+</div>
+
+<canvas id="the-canvas" height=180px ></canvas><Br>
+
+<canvas id="the-canvas2" width=300px height=250px></canvas><br>
+<a href="PDF.html?2020125700502!!">Page-</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<a href="PDF.html?2020125700502!!">Page+</a><br>
+<a id="directlink" href="PDF.html?2020125700502!!">Direct Link</a>
+
+
+</align>
+<script>
+
+    // If absolute URL from the remote server is provided, configure the CORS
+    // header on that server.
+    // idea: convert canvas to vector like http://fabricjs.com
+    //http://gliffy.github.io/canvas2svg/
+
+
+    //if direct link passed in reference, then decode and show that patent - ends in '!!'
+    var directlink = window.location.href.substr(window.location.href.length -2, 2)
+    if (directlink == "!!"){
+        urlpre  = window.location.href.substr(window.location.href.length -15, 2) // -13-2=15
+        urlyear = window.location.href.substr(window.location.href.length -13, 4) // -9-4=13
+        urlnum  = window.location.href.substr(window.location.href.length -9, 2) // -7-2=9 
+        urlnum2 = window.location.href.substr(window.location.href.length -7, 3) // -4-3=7
+        urlpage = window.location.href.substr(window.location.href.length -4, 2) // -2-2 because line ends with '11' 
+        if(urlpage.substr(0,1) =="0"){urlpage=urlpage.substr(1,1);} //strip leading 0 off page number if has it
+    }
+
+    
+    if (directlink == "!!"){
+        var hots ="";
+        var nots = "";
+    }
+    else{
+    // determine counter of hots and nots from number in URL
+    var hots = window.location.href.substr(window.location.href.length -6, 3)
+    hots = Number(hots);
+    if (isNaN(hots)){hots = 234;} // default if not present
+    var nots = window.location.href.substr(window.location.href.length -3, 3)
+    nots = Number(nots);
+    if (isNaN(nots)){nots = 123;} // default if not present
+    //var hotsnotscount = '' + hots +  '' + nots;
+    //window.alert(hotsnotscount);
+    }
+
+    document.getElementById("hot").value = "hot 123";
+    document.getElementById("not").value = "not 456";
+    
+    
+    var canvas = document.getElementById("the-canvas2");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "30px Courier"; //was 30px
+    ctx.fillText("-[Patent]-", 10, 50);
+    
+
+    
+    if (directlink == "!!"){
+    }
+    else{
+    var urlpre = Math.floor(Math.random() * 100) + 1; // was 00 - seems to go to 99
+    if (urlpre < 10){urlpre="0" + urlpre;}
+    
+    var urlyear = 2002 + Math.floor(Math.random() * 17) + 1; // 2002 - 2019
+    var urlnum = Math.floor(Math.random() * 99) + 1; // was 00,  01 05, 10, 15, 50, 90, 99
+    var urlnum2 = Math.floor(Math.random() * 37) + 1; // was 012, 000, 020, 030, 035, 036, 037
+    if (urlnum2 < 10){urlnum2="0" + urlnum2;}
+    urlnum2 = "0" + urlnum2 // final form is 3 digit 000 up to 037 max
+    
+    //var urlpage = Math.floor(Math.random() * 3) + 1; // page in publication 0 2 may be first image?
+    var urlpage = 2; // page in publication 0 2 may be first image?
+    var urlpage2dig = "02";
+    }
+
+    
+    var line = 80;
+    ctx.fillText('Urlpre : '+ urlpre, 10, line);line+=30;
+    ctx.fillText('Year   : '+ urlyear, 10, line);line+=30;
+    ctx.fillText('Urlnum : '+ urlnum, 10, line);line+=30;
+    ctx.fillText('Urlnum2: '+ urlnum2, 10, line);line+=30;
+    ctx.fillText('Page   : '+ urlpage, 10, line);line+=30;
+    if (urlpage < 10){var urlpage2dig = "0" + urlpage} //to encode link to page# in 2 digits
+    var seclinkpage            = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!";
+    var seclinkurlpreminus     = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlpreplus      = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlyearminus    = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlyearplus     = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlurlnumminus  = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlurlnumplus   = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlurlnum2minus = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlurlnum2plus  = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    
+    var urlpage2digminus = Number(urlpage) - 1; 
+    if (urlpage2digminus < 0){urlpage2digminus = 0;} //to encode link to page# in 2 digits
+    if (urlpage2digminus < 10){urlpage2digminus= "0" + urlpage2digminus} //to encode link to page# in 2 digits
+    var urlpage2digplus = Number(urlpage) + 1; 
+    if (urlpage2digplus < 10){urlpage2digplus= "0" + urlpage2digplus} //to encode link to page# in 2 digits
+    var seclinkurlpageminus = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2digminus+ "!!";
+    var seclinkurlpageplus  = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2digplus+ "!!";
+
+    
+    //ctx.fillText('Link   : '+ seclink, 10, line);line+=30;
+    
+    
+    document.getElementsByTagName("a")[0].setAttribute("href", seclinkurlpageminus); //back at top of page
+    document.getElementsByTagName("a")[1].setAttribute("href", seclinkurlpageplus); //forward page at top of page
+    document.getElementsByTagName("a")[2].setAttribute("href", seclinkpage); //link at bottom of page
+
+
+    var canvas = document.getElementById("the-canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "30px Courier";
+    if (directlink == "!!"){
+        ctx.fillText("Direct Link", 10, 50);
+    }
+    else {
+    ctx.fillText("Loading...", 10, 50);
+    ctx.fillText("--[Score]--", 10, 80);
+    ctx.fillStyle = "lightblue";
+    ctx.fillText("  HOT: " + (hots - 234), 10, 110);
+    ctx.fillStyle = "red";
+    ctx.fillText("  NOT: " +(nots - 123), 10, 140);
+    ctx.fillStyle = "green";
+    ctx.fillText("  TOT: " + (hots +nots-123-234), 10, 170);
+    ctx.fillText("" ,0,0);
+    }
+
+
+    //var url = 'https://yacdn.org/serve/https://pdfaiw.uspto.gov/02/2017/00/037/2.pdf';
+    var url = 'https://yacdn.org/serve/https://pdfaiw.uspto.gov/'+urlpre+'/'+urlyear+'/'+urlnum+'/'+urlnum2+'/'+urlpage+'.pdf';
+    
+    // Loaded via <script> tag, create shortcut to access PDF.js exports.
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    
+    // The workerSrc property shall be specified.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdf.worker.js';
+    
+    var pdfDoc = null,
+        pageNum = 1,
+        pageRendering = true,
+        pageNumPending = null,
+        scale = 1.5,
+        canvas = document.getElementById('the-canvas'),
+        ctx = canvas.getContext('2d');
+    
+    /**
+     * Get page info from document, resize canvas accordingly, and render page.
+     * @param num Page number.
+     */
+    function renderPage(num) {
+      pageRendering = true;
+      // Using promise to fetch the page
+      pdfDoc.getPage(num).then(function(page) {
+        var viewport = page.getViewport({scale: scale});
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+    
+        // Render PDF page into canvas context
+        var renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+        var renderTask = page.render(renderContext);
+    
+        // Wait for rendering to finish
+        renderTask.promise.then(function() {
+          pageRendering = false;
+          if (pageNumPending !== null) {
+            // New page rendering is pending
+            renderPage(pageNumPending);
+            pageNumPending = null;
+          }
+        });
+      });
+    
+      // Update page counters
+      ////document.getElementById('page_num').textContent = num;
+    }
+    
+    /**
+     * If another page rendering in progress, waits until the rendering is
+     * finised. Otherwise, executes rendering immediately.
+     */
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    }
+    
+
+    
+    
+    /**
+     * Asynchronously downloads PDF.
+     */
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+      pdfDoc = pdfDoc_;
+     //// document.getElementById('page_count').textContent = pdfDoc.numPages;
+    
+      // Initial/first page rendering
+      renderPage(pageNum);
+    });
+
+    function buttonhot() {
+        //window.alert('button hot hot=' + hots + ' not' + nots);
+        hots = hots +1;
+        var hotsnotscount = '' + hots +  '' + nots;
+        window.location.href='PDF.html?'+hotsnotscount;
+        reload();
+        }
+
+    function buttonnot() {
+        //window.alert('button not hot=' + hots + ' not' + nots);
+        nots = nots +1;
+        var hotsnotscount = '' + hots +  '' + nots;
+        window.location.href='PDF.html?'+hotsnotscount;
+        reload();
+        }
+
+     
+        
+
+    </script>
+
+
 
 </body>
-
 </html>
