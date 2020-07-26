@@ -115,23 +115,23 @@
     ctx.fillText('Urlnum2: '+ urlnum2, 10, line);line+=30;
     ctx.fillText('Page   : '+ urlpage, 10, line);line+=30;
     if (urlpage < 10){var urlpage2dig = "0" + urlpage} //to encode link to page# in 2 digits
-    var seclinkpage            = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!";
-    var seclinkurlpreminus     = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
-    var seclinkurlpreplus      = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
-    var seclinkurlyearminus    = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
-    var seclinkurlyearplus     = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
-    var seclinkurlurlnumminus  = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
-    var seclinkurlurlnumplus   = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
-    var seclinkurlurlnum2minus = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
-    var seclinkurlurlnum2plus  = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkpage            = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!";
+    var seclinkurlpreminus     = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlpreplus      = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlyearminus    = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlyearplus     = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlurlnumminus  = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlurlnumplus   = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlurlnum2minus = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
+    var seclinkurlurlnum2plus  = "=index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2dig + "!!"; //not done
     
     var urlpage2digminus = Number(urlpage) - 1; 
     if (urlpage2digminus < 0){urlpage2digminus = 0;} //to encode link to page# in 2 digits
     if (urlpage2digminus < 10){urlpage2digminus= "0" + urlpage2digminus} //to encode link to page# in 2 digits
     var urlpage2digplus = Number(urlpage) + 1; 
     if (urlpage2digplus < 10){urlpage2digplus= "0" + urlpage2digplus} //to encode link to page# in 2 digits
-    var seclinkurlpageminus = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2digminus+ "!!";
-    var seclinkurlpageplus  = "PDF.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2digplus+ "!!";
+    var seclinkurlpageminus = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2digminus+ "!!";
+    var seclinkurlpageplus  = "index.html?" + '' + urlpre + '' + urlyear + '' + urlnum + ''+ urlnum2 + ''+ urlpage2digplus+ "!!";
 
     
     //ctx.fillText('Link   : '+ seclink, 10, line);line+=30;
@@ -242,7 +242,7 @@
         //window.alert('button hot hot=' + hots + ' not' + nots);
         hots = hots +1;
         var hotsnotscount = '' + hots +  '' + nots;
-        window.location.href='PDF.html?'+hotsnotscount;
+        window.location.href='index.html?'+hotsnotscount;
         reload();
         }
 
@@ -250,7 +250,7 @@
         //window.alert('button not hot=' + hots + ' not' + nots);
         nots = nots +1;
         var hotsnotscount = '' + hots +  '' + nots;
-        window.location.href='PDF.html?'+hotsnotscount;
+        window.location.href='index.html?'+hotsnotscount;
         reload();
         }
 
